@@ -92,7 +92,7 @@ export default function Layout() {
     <SafeAreaProvider>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='(private)' />
+          <Stack.Screen name='(public)' />
         </Stack>
 
         {/* <PortalHost /> */}
