@@ -3,13 +3,22 @@ import { Text } from '@/components/ui/text'
 import { Link } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
-import { TrophyAndStars } from './trophy-and-stars'
+import { LayoutList } from './layout-list'
+import { PanGesture } from './pan-gesture'
+import { Swipe } from './swipe'
 
 export default function Page() {
   return (
     <View className='flex-1 gap-5'>
-      {/* <SkiaPath /> */}
-      <TrophyAndStars />
+      <Link asChild href='/'>
+        <Button>
+          <Text>Return</Text>
+        </Button>
+      </Link>
+
+      <Swipe />
+      <LayoutList />
+      <PanGesture />
 
       <View className='flex-1 gap-2'>
         <Link asChild href='/' className='mt-auto'>

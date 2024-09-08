@@ -2,11 +2,12 @@ import { useColorScheme } from '@/hooks/use-color-scheme'
 import { NAV_THEME } from '@/styles/constants'
 import '@/styles/global.css'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ThemeProvider, type Theme } from '@react-navigation/native'
-import { Stack } from 'expo-router'
+import { type Theme, ThemeProvider } from '@react-navigation/native'
+import { Slot } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect, useState } from 'react'
 import { Platform } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 export { ErrorBoundary } from 'expo-router'
@@ -41,6 +42,7 @@ export default function Layout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme()
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false)
 
+  // @ts-ignore
   useEffect(() => {
     ;(async () => {
       const theme = await AsyncStorage.getItem('theme')
@@ -55,7 +57,7 @@ export default function Layout() {
         return
       }
 
-      const colorTheme = theme === 'dark' ? 'dark' : 'light'
+      const colorTheme = 'light'
 
       if (colorTheme !== colorScheme) {
         setColorScheme(colorTheme)
@@ -91,11 +93,11 @@ export default function Layout() {
   return (
     <SafeAreaProvider>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='(public)' />
-        </Stack>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Slot />
 
-        {/* <PortalHost /> */}
+          {/* <PortalHost /> */}
+        </GestureHandlerRootView>
       </ThemeProvider>
     </SafeAreaProvider>
   )

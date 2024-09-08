@@ -1,6 +1,8 @@
 import { iconWithClassName } from '@/lib/icon-with-classname'
-import { LucideX } from 'lucide-react-native'
+import { LucideInfo, LucideTrash, LucideX } from 'lucide-react-native'
 
 iconWithClassName(LucideX)
+iconWithClassName(LucideInfo)
+iconWithClassName(LucideTrash)
 
-export { LucideX }
+export { LucideInfo, LucideTrash, LucideX }

@@ -3,11 +3,12 @@ import * as Slot from '@rn-primitives/slot'
 import { SlottableTextProps, TextRef } from '@rn-primitives/types'
 import * as React from 'react'
 import { Text as RNText } from 'react-native'
+import Animated from 'react-native-reanimated'
 
 const TextClassContext = React.createContext<string | undefined>(undefined)
 
-const Text = React.forwardRef<TextRef, SlottableTextProps>(
-  ({ className, asChild = false, ...props }, ref) => {
+const Text = Animated.createAnimatedComponent(
+  React.forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
     const textClass = React.useContext(TextClassContext)
     const Component = asChild ? Slot.Text : RNText
     return (
@@ -17,7 +18,7 @@ const Text = React.forwardRef<TextRef, SlottableTextProps>(
         {...props}
       />
     )
-  }
+  })
 )
 Text.displayName = 'Text'
 
